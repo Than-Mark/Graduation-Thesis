@@ -1,0 +1,209 @@
+\documentclass[12pt, oneside]{ctexbook}
+%%务必用XeLaTeX，否则封面页信息会不对齐！
+%宏包另有需求自行添加！
+
+\usepackage[left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{ctex}
+\usepackage{titlesec}
+% \usepackage{titletoc}
+\usepackage{appendix}
+%\usepackage[colorlinks]{hyperref}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{listings,xcolor}
+\usepackage{setspace}
+\usepackage{fancyhdr}
+\usepackage{appendix}
+\usepackage{cite}
+\usepackage{indentfirst}
+\usepackage{pdfpages}
+\usepackage{float}  % 防止图片乱跑
+
+% 首行缩进两个10pt大小的中文字符
+\setlength{\parindent}{2em}
+
+% 设置章节前空行
+\titlespacing{\chapter}{0pt}{-20pt}{1\baselineskip}
+\setlength{\headheight}{14.5pt} % 页眉高度
+% 公式树代码支持
+\usepackage{tikz}
+\usetikzlibrary{chains,scopes,positioning,backgrounds,shapes,fit,shadows,calc,arrows.meta}
+\RequirePackage{amsmath,mathrsfs,amsfonts,amssymb}
+\tikzset{
+	head/.style = {fill = orange!90!blue},
+	tail/.style = {fill = blue!70!yellow},
+	fun/.style = {fill = orange!90!blue},
+	num/.style = {fill = blue!70!yellow},
+	gry/.style = {fill = gray}
+}
+\usetikzlibrary{patterns,backgrounds}
+
+%%下面两个命令显示PDF文件行号,方便修改！
+% \usepackage{lineno}
+% \linenumbers
+
+%题目
+\newcommand{\cntitle}{\textbf{论文标题}}
+\newcommand{\entitle}{\textbf{Title of the Thesis}}
+
+% 定义封面信息
+% 学生姓名,指导老师姓名和指导老师职称默认为3个字,如果为2个字,中间用\quad隔开.要是四个字自行修改！
+\newcommand{\class}{19专业0S}
+\newcommand{\studentnumber}{2019000000}
+\newcommand{\name}{姓\quad 名}
+\newcommand{\adviser}{导\quad 师}
+\newcommand{\professionaltitle}{教\quad 授}
+
+%定义时间
+\newcommand{\cnyear}{二〇二三年六月}
+\newcommand{\enyear}{2023}
+
+%定义中英文摘要环境
+\newenvironment{enabstract}{%
+  \par%\small
+  \noindent\mbox{}\hfill\hfill\mbox{}\par
+  \vskip 2.5ex}{\par\vskip 2.5ex}
+\newenvironment{cnabstract}{%
+  \par%\small
+  \noindent\mbox{}\hfill\hfill\mbox{}\par
+  \vskip 2.5ex}{\par\vskip 2.5ex}
+
+%定义上标引用
+\newcommand{\upcite}[1]{\textsuperscript{\textsuperscript{\cite{#1}}}}
+
+%定义引用格式
+\newcommand{\myeqref}[1]{\eqref{#1}式}
+\newcommand{\figref}[1]{图\ref{#1}}
+\newcommand{\tabref}[1]{表\ref{#1}}
+
+%定义公式等标号
+\numberwithin{equation}{section}
+\numberwithin{table}{section}
+\numberwithin{figure}{section}
+
+%定义定理(如有需要自行添加)
+\newtheorem{lemma}{引理}[section]
+\newtheorem{theorem}{定理}[section]
+\newtheorem{example}{例}[section]
+\newtheorem{remark}{注}[section]
+\newtheorem{corollary}{推论}[section]
+\newtheorem{definition}{定义}[section]
+
+%\def\proof{\noindent{\heiti 证明 }}
+
+
+%定义代码环境
+% 设置matlab代码环境
+\lstnewenvironment{matlab}[1][]{
+	\lstset{
+		language=Matlab,
+		% deletekeywords={disp},% 可在此行去除特定关键词的语法高亮	
+        % morekeywords={ r , K , alpha , beta , gamma , mu , D1 , D3 , d }	
+		keywordstyle=\color{blue},% 设置关键词样式
+		stringstyle=\color[rgb]{0.75,0,0.75},% 设置字符串样式
+		commentstyle=\songti\color[rgb]{0,0.5,0},% 设置注释样式
+		#1
+	}
+}{}
+
+% 设置python代码环境
+\lstnewenvironment{python}[1][]{
+	\lstset{
+		language=Python,
+		keywordstyle=\color[RGB]{255,119,0},
+		morekeywords={as},
+		deletekeywords={print},
+		keywordstyle=[2]\color[RGB]{144,0,144},
+		stringstyle=\color[RGB]{0,170,0},
+		commentstyle=\songti\color[RGB]{221,0,0},
+		basicstyle=\tiny\ttfamily,
+		lineskip=-1pt, % 将行距缩小1pt
+		breaklines=true, % 允许自动断行
+  		breakindent=2em, % 设置自动断行后新行的缩进量为2个em
+		#1
+	}
+}{}
+
+%标题设置
+\titleformat{\chapter}{\heiti\centering\Large}{\heiti{第\chinese{chapter}章}}{1em}{\heiti}
+\titleformat{\section}{\large}{\textbf{\thesection}}{1em}{\heiti}
+\titleformat{\subsection}{\normalsize}{\textbf{\thesubsection}}{1em}{\heiti}
+
+%页眉设置
+\pagestyle{fancy}
+\lhead{}
+\chead{\heiti 江苏理工学院数理学院\enyear 届毕业论文}
+\rhead{}
+
+\begin{document}
+%logo必须放在同一个文件夹下
+%封面页
+\thispagestyle{empty}
+\include{封面页}
+	
+%版权页
+\thispagestyle{empty}
+\include{版权页}
+	
+%以上为封面页,版权页(无需修改)
+\setcounter{page}{1}
+\pagenumbering{Roman}
+\newpage
+\begin{center}
+    \Large\heiti \cntitle
+\end{center}
+\begin{cnabstract}
+    \addcontentsline{toc}{chapter}{摘要}
+    \input{cnabstract}
+\end{cnabstract}
+
+\newpage
+\begin{center}
+	\large{\entitle}
+\end{center}
+
+\begin{enabstract}
+    \addcontentsline{toc}{chapter}{Abstract}
+    {\small
+    \input{enabstract}
+    }
+\end{enabstract}
+%目录页
+\newpage
+%\begin{spacing}{0.5}
+\setcounter{tocdepth}{2}
+\tableofcontents
+%\end{spacing}
+
+%正文
+\newpage
+\setcounter{page}{2}
+\pagenumbering{arabic}
+
+%%以下开始为正文部分，推荐使用\include{file}命令输入各章节
+
+\include{inputchap1}
+
+%参考文献
+\addcontentsline{toc}{chapter}{参考文献}
+\bibliographystyle{gbt7714-2005}
+\begin{spacing}{1}
+\bibliography{ref}
+\end{spacing}
+
+\titleformat{\chapter}{\centering\Large\bfseries}{附录\thechapter}{1em}{}
+\begin{appendix}
+
+\include{appendix}
+
+\include{mywork}
+
+\include{acknowledgment}
+\end{appendix}
+
+
+
+\end{document} 
